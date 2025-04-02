@@ -1,0 +1,261 @@
+﻿@model List<LeadMasterViewModel>
+<div class="main-content">
+    @* <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div> *@
+
+    <div class="p-6" style="margin-left: -23px;">
+        <h2 class="text-xl font-semibold text-blue-600">Leads</h2>
+
+        <!-- Filters Section -->
+        <div class="mt-4 flex items-center space-x-3">
+            <!-- All Leads -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-200 text-black">
+                <i data-lucide="filter" class="w-5 h-5"></i>
+                <span>All Leads</span>
+            </button>
+
+            <!-- Contacted -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-300 text-gray-600">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+                <span>Contacted</span>
+            </button>
+
+            <!-- Not Contacted -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-300 text-gray-600">
+                <i data-lucide="phone-off" class="w-5 h-5"></i>
+                <span>Not Contacted</span>
+            </button>
+
+            <!-- Qualified -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-300 text-gray-600">
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                <span>Qualified</span>
+            </button>
+
+            <!-- Add Filter -->
+            <a href="#" class="text-blue-500 hover:underline">+ Add Filter</a>
+        </div>
+
+        <!-- Add Lead Button -->
+        <div class="mt-4">
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow" data-bs-toggle="modal" data-bs-target="#leadFormModal">+ ADD LEAD</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+
+    <div class="table-container">
+        @if (Model != null && Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Date</th>
+                        <th>Client Name</th>
+                        <th>Enquiry For Site</th>
+                        <th>Floor</th>
+                        <th>Lead Source</th>
+                        <th>Assigned To</th>
+                        <th>Status</th>
+                        <th>Lead Category</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.LeadId</td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.ContactNo1</td>
+                            <td>@item.Email</td>
+                            <td>@item.AssignedToName</td>
+                            <td>@item.SiteName</td>
+                            <td><a asp-controller="Dashboard" asp-action="LeadDetails" asp-route-id="@item.LeadId" class="view-link">View Details</a></td>
+                        </tr>
+                    }
+
+                    @* <tr>
+                    <td>2</td>
+                    <td>23 Jan 2025</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>12 Paradise</td>
+                    <td>Lower</td>
+                    <td>Instagram</td>
+                    <td>---</td>
+                    <td>Contacted</td>
+                    <td><span class="status cold">Cold</span></td>
+                    <td>+91 7350292956</td>
+                    <td><a asp-controller="Dashboard" asp-action="LeadDetails" class="view-link">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>21 Jan 2025</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>12 Paradise</td>
+                    <td>Higher</td>
+                    <td>Walk-ins</td>
+                    <td>---</td>
+                    <td>Interested</td>
+                    <td><span class="status hot">Hot</span></td>
+                    <td>+91 7350292956</td>
+                    <td><a asp-controller="Dashboard" asp-action="LeadDetails" class="view-link">View Details</a></td>
+                </tr> *@
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="leadFormModal" tabindex="-1" aria-labelledby="leadFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="leadFormModalLabel">Add New Lead</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddLead" method="post">
+                   @*  <div class="row">
+                        <div class="col-md-4">
+                            <label asp-for="FirstName" class="form-label">Name of client</label>
+                            <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter name">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="FirstName" class="form-label">Site Name</label>
+                            <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter project">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Property Type</label>
+                            <select class="form-select">
+                                <option>Select property type</option>
+                            </select>
+                        </div>
+                    </div> *@
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Name of client</label>
+                            <input type="text" class="form-control" placeholder="Enter name">
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Site Name</label>
+                            <input type="text" class="form-control" placeholder="Enter project">
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Property Type</label>
+                            <select class="form-select">
+                                <option>Select property type</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Select Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Referred by</label>
+                            <select class="form-select">
+                                <option>Select Source</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Channel Partner</label>
+                            <select class="form-select">
+                                <option>Select Partner</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Budget Range</label>
+                            <div class="d-flex">
+                                <input type="text" class="form-control me-2" placeholder="From">
+                                <input type="text" class="form-control" placeholder="To">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Contact Number 1</label>
+                            <input type="text" class="form-control" placeholder="Enter number">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Contact Number 2</label>
+                            <input type="text" class="form-control" placeholder="Enter number">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Email Id</label>
+                            <input type="email" class="form-control" placeholder="Enter email id">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Assign Lead to</label>
+                            <input type="text" class="form-control" placeholder="Enter name">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option>Select Status</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Lead Category</label>
+                            <select class="form-select">
+                                <option>Select Category</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Floor Preference</label>
+                            <select class="form-select">
+                                <option>Select Floor Preference</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-control" placeholder="Add new Notes"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="~/assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="~/assets/js/pages/dashboard.js"></script>
+
+<script src="~/assets/js/main.js"></script>

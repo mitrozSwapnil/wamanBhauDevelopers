@@ -1,0 +1,141 @@
+﻿<div class="main-content">
+
+
+    <div class="p-6" style="margin-left: -23px;">
+        <h2 class="text-xl font-semibold text-blue-600">Channel Partners</h2>
+
+        <div class="mt-4 flex items-center w-full justify-between">
+
+            <div class="flex items-center space-x-3">
+                <button class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white shadow">
+                    <i data-lucide="filter" class="w-5 h-5"></i>
+                </button>
+
+                <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-200 text-black">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    <span>All Channel Partners</span>
+                </button>
+
+                <a href="#" class="text-blue-500 hover:underline">+ Add Filter</a>
+            </div>
+
+            <a asp-controller="Dashboard" asp-action="ChannelPartnerAnalytics" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow">ANALYTICS</a>
+
+        </div>
+
+        <div class="mt-4 flex space-x-3">
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow" data-bs-toggle="modal" data-bs-target="#channelPartnerModal">+ ADD PARTNER</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Last Lead</th>
+                    <th>Partner Name</th>
+                    <th>Email</th>
+                    <th>Phone No.</th>
+                    <th>Agency Name</th>
+                    <th>Leads</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>25 Jan 2025</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>test@gmail.com</td>
+                    <td>+91 7350292956</td>
+                    <td>Facebook</td>
+                    <td>Higher</td>
+                    <td><a asp-controller="Dashboard" asp-action="ChannelPartnerDetails" class="view-link">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>23 Jan 2025</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>test@gmail.com</td>
+                    <td>+91 7350292956</td>
+                    <td>Facebook</td>
+                    <td>Higher</td>
+                    <td><a asp-controller="Dashboard" asp-action="ChannelPartnerDetails" class="view-link">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>21 Jan 2025</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>test@gmail.com</td>
+                    <td>+91 7350292956</td>
+                    <td>Facebook</td>
+                    <td>Higher</td>
+                    <td><a asp-controller="Dashboard" asp-action="ChannelPartnerDetails" class="view-link">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="channelPartnerModal" tabindex="-1" aria-labelledby="channelPartnerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="channelPartnerModalLabel">Add Partner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Partner Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Email Id</label>
+                            <input type="email" class="form-control" placeholder="Enter email id">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Contact Number</label>
+                            <input type="text" class="form-control" placeholder="Enter number">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Agency Name</label>
+                            <select class="form-select">
+                                <option>Select Agency</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="~/assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="~/assets/js/pages/dashboard.js"></script>
+
+<script src="~/assets/js/main.js"></script>

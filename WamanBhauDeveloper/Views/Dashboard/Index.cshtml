@@ -1,0 +1,268 @@
+﻿
+    <div class="container mx-auto">
+        <h2 class="text-xl font-bold text-blue-600 mb-4">Dashboard</h2>
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-7 space-y-4">
+                <!-- Lead Overview -->
+                <div class="flex items-center justify-between space-x-3">
+                    <h1 class="text-xl font-bold">Lead Overview</h1>
+
+                    <div class="flex items-center space-x-2">
+                        <button class="flex items-center bg-gray-100 text-blue-600 px-3 py-2 rounded-lg shadow">
+                            <span class="text-sm font-medium">1 Month</span>
+                            <span class="ml-1 text-sm text-blue-600 cursor-pointer">✕</span>
+                        </button>
+
+                        <button class="flex items-center justify-center w-10 h-10 bg-blue-600 rounded-lg shadow">
+                            <i data-lucide="filter" class="w-5 h-5" stroke="white"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="card text-center">
+                        <p class="text-gray-500" style="color: #4F64E3 !important; font-weight: 600; text-align: left;">New Leads</p>
+                        <p class="text-2xl font-bold" style="text-align: left;">12</p>
+                    </div>
+                    <div class="card text-center">
+                        <p class="text-gray-500" style="color: #4F64E3 !important; font-weight: 600; text-align: left;">Contacted</p>
+                        <p class="text-2xl font-bold" style="text-align: left;">06</p>
+                    </div>
+                    <div class="card text-center">
+                        <p class="text-gray-500" style="color: #4F64E3 !important; font-weight: 600; text-align: left;">Qualified</p>
+                        <p class="text-2xl font-bold" style="text-align: left;">05</p>
+                    </div>
+                    <div class="card text-center">
+                        <p class="text-gray-500" style="color: #4F64E3 !important; font-weight: 600; text-align: left;">Closed</p>
+                        <p class="text-2xl font-bold" style="text-align: left;">18</p>
+                    </div>
+                </div>
+
+                <!-- Leads vs Closures Chart -->
+                <div class="card">
+                    <h3 class="text-lg font-bold mb-2">Leads Vs Closures (12th Jan - 12th Feb)</h3>
+                    <canvas id="leadsChart"></canvas>
+                </div>
+
+                <!-- Flats and Parking -->
+                <!-- <div class="card">
+                    <h3 class="text-lg font-bold mb-2">Flats and Parking</h3>
+                    <div class="flex items-center">
+                        <div>
+                            <p class="text-blue-500">Allotted Flats - 20</p>
+                            <p class="text-blue-500">Available Flats - 80</p>
+                            <p class="text-pink-500">Available Parking - 90</p>
+                            <p class="text-pink-500">Allotted Parking - 10</p>
+                        </div>
+                        <canvas id="parkingChart" class="ml-auto"></canvas>
+                    </div>
+                </div> -->
+                <!-- Flats and Parking Section -->
+                <div class="col-span-7">
+                    <div class="card bg-blue-500 text-white rounded-xl p-5" style="background-color: white;">
+                        <h3 class="text-lg font-bold mb-3">Flats and Parking</h3>
+                        <div class="grid grid-cols-2 items-center">
+                            <div class="space-y-2">
+                                <p class="flex items-center" style="color: black;">
+                                    <span class="w-3 h-3 bg-blue-300 rounded-full inline-block mr-2"></span>
+                                    Allotted Flats - 20
+                                </p>
+                                <p class="flex items-center" style="color: black;">
+                                    <span class="w-3 h-3 bg-pink-300 rounded-full inline-block mr-2"></span>
+                                    Available Flats - 80
+                                </p>
+                                <p class="flex items-center" style="color: black;">
+                                    <span class="w-3 h-3 bg-blue-300 rounded-full inline-block mr-2"></span>
+                                    Available Parking - 90
+                                </p>
+                                <p class="flex items-center" style="color: black;">
+                                    <span class="w-3 h-3 bg-pink-300 rounded-full inline-block mr-2"></span>
+                                    Allotted Parking - 10
+                                </p>
+                            </div>
+                            <div class="flex justify-end">
+                                <canvas id="parkingChart" class="w-32 h-32"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Follow-up Calendar -->
+            <div class="col-span-5">
+                <div class="bg-white p-6 rounded-xl shadow-md h-[930px] flex flex-col overflow-y-auto">
+                    <h2 class="text-xl font-semibold text-blue-600">Follow up Calendar</h2>
+                    <div class="mt-4 space-y-4  h-[440px]">
+
+                        <div class="mt-4 flex justify-between items-center">
+                            <button id="prevMonth" class="text-blue-600 text-xl">←</button>
+                            <h3 id="currentMonth" class="text-lg font-semibold"></h3>
+                            <button id="nextMonth" class="text-blue-600 text-xl">→</button>
+                        </div>
+
+                        <!-- Calendar Grid -->
+                        <div class="grid grid-cols-7 text-center mt-2 font-semibold text-gray-600">
+                            <div>Mon</div> <div>Tue</div> <div>Wed</div> <div>Thu</div>
+                            <div>Fri</div> <div>Sat</div> <div>Sun</div>
+                        </div>
+
+                        <!-- Scrollable Dates Container -->
+                        <div id="calendarContainer" class="overflow-y-auto h-[40px] transition-all duration-300">
+                            <div id="calendarDays" class="grid grid-cols-7 text-center text-gray-800 mt-2">
+                                <!-- Dates will be injected here dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="mt-6 space-y-4">
+                            <div class="bg-blue-500 text-white p-4 rounded-lg">
+                                <p class="font-semibold">Mahesh Jadhav</p>
+                                <p class="text-sm">📞 +91 9898985258</p>
+                                <p>Call Mahesh to give reminder</p>
+                            </div>
+
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <p class="text-gray-700 font-semibold">Amit Kumar - Feb 1, 2025</p>
+                                <p class="text-gray-500">📞 +91 9898985258 | Call Mahesh to give reminder</p>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <p class="text-gray-700 font-semibold">Amit Kumar - Feb 1, 2025</p>
+                                <p class="text-gray-500">📞 +91 9898985258 | Call Mahesh to give reminder</p>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <p class="text-gray-700 font-semibold">Amit Kumar - Feb 1, 2025</p>
+                                <p class="text-gray-500">📞 +91 9898985258 | Call Mahesh to give reminder</p>
+                            </div>
+
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <p class="text-gray-700 font-semibold">Amit Kumar - Feb 1, 2025</p>
+                                <p class="text-gray-500">📞 +91 9898985258 | Call Mahesh to give reminder</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <a href="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js.map"></a>
+
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendors/apexcharts/apexcharts.amd.js"></script>
+    <script src="~/assets/vendors/apexcharts/apexcharts.common.js"></script>
+    <script src="~/assets/vendors/apexcharts/apexcharts.esm.js"></script>
+    <script src="~/assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="~/assets/vendors/apexcharts/apexcharts.min.js"></script>
+    <script src="~/assets/js/pages/dashboard.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+
+    <script>
+        var ctx = document.getElementById('leadsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['12th Jan', '14th Jan', '16th Jan', '18th Jan', '20th Jan', '22nd Jan'],
+                datasets: [
+                    {
+                        label: 'Leads',
+                        data: [60, 40, 70, 50, 60, 30],
+                        backgroundColor: 'blue'
+                    },
+                    {
+                        label: 'Closures',
+                        data: [30, 20, 40, 25, 30, 20],
+                        backgroundColor: 'pink'
+                    }
+                ]
+            }
+        });
+
+        var ctx2 = document.getElementById('parkingChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Available', 'Allotted'],
+                datasets: [{
+                    data: [80, 20],
+                    backgroundColor: ['blue', 'pink']
+                }]
+            }
+        });
+    </script>
+
+
+    <!-- Calendar Script Code -->
+
+    <script>
+        const calendarDays = document.getElementById("calendarDays");
+        const currentMonth = document.getElementById("currentMonth");
+        const prevMonthBtn = document.getElementById("prevMonth");
+        const nextMonthBtn = document.getElementById("nextMonth");
+        const calendarContainer = document.getElementById("calendarContainer");
+
+        let date = new Date();
+
+        function renderCalendar() {
+            calendarDays.innerHTML = "";
+            let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+            let lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+
+            // Adjust first day index (for Monday start)
+            firstDay = firstDay === 0 ? 6 : firstDay - 1;
+
+            currentMonth.textContent = date.toLocaleString("default", { month: "long", year: "numeric" });
+
+            // Empty cells for alignment
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement("div");
+                calendarDays.appendChild(emptyCell);
+            }
+
+            // Generate date cells
+            for (let i = 1; i <= lastDate; i++) {
+                const day = document.createElement("div");
+                day.textContent = i;
+                day.className = "p-2 cursor-pointer rounded-lg hover:bg-blue-500 hover:text-white";
+
+                if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
+                    day.classList.add("bg-blue-500", "text-white");
+                }
+
+                calendarDays.appendChild(day);
+            }
+
+            // Reset scroll position to top
+            calendarContainer.scrollTop = 0;
+        }
+
+        prevMonthBtn.addEventListener("click", () => {
+            date.setMonth(date.getMonth() - 1);
+            renderCalendar();
+        });
+
+        nextMonthBtn.addEventListener("click", () => {
+            date.setMonth(date.getMonth() + 1);
+            renderCalendar();
+        });
+
+        // Expand calendar when scrolled
+        calendarContainer.addEventListener("scroll", () => {
+            if (calendarContainer.scrollTop > 5) {
+                calendarContainer.classList.add("h-[180px]");
+            } else {
+                calendarContainer.classList.remove("h-[180px]");
+            }
+        });
+
+        renderCalendar();
+    </script>

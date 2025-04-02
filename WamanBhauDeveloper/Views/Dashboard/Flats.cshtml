@@ -1,0 +1,189 @@
+﻿<div class="main-content">
+
+
+    <div class="p-6" style="margin-left: -23px;">
+        <h2 class="text-xl font-semibold text-blue-600">Flats-Tower 1</h2>
+
+        <!-- Filters Section -->
+        <div class="mt-4 flex items-center space-x-3">
+
+            <button class="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-lg shadow">
+                <i data-lucide="filter" class="w-5 h-5"></i>
+            </button>
+
+            <!-- All Leads -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-200 text-black">
+                <i data-lucide="filter" class="w-5 h-5"></i>
+                <span>All Leads</span>
+            </button>
+
+            <!-- Contacted -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-300 text-gray-600">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+                <span>Contacted</span>
+            </button>
+
+            <!-- Not Contacted -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-300 text-gray-600">
+                <i data-lucide="phone-off" class="w-5 h-5"></i>
+                <span>Not Contacted</span>
+            </button>
+
+            <!-- Qualified -->
+            <button class="flex items-center space-x-2 px-4 py-2 rounded-lg shadow bg-gray-300 text-gray-600">
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                <span>Qualified</span>
+            </button>
+
+            <!-- Add Filter -->
+            <a href="#" class="text-blue-500 hover:underline">+ Add Filter</a>
+        </div>
+
+        <!-- Add Lead Button -->
+        <div class="mt-4">
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow" data-bs-toggle="modal" data-bs-target="#flatsFormModal">+ ADD Flat</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Site</th>
+                    <th>Tower</th>
+                    <th>Flat No.</th>
+                    <th>Assigned To</th>
+                    <th>Booking Date</th>
+                    <th>Payment Status</th>
+                    <th>Next Reminder Date</th>
+                    <th>Alloted Parking</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>121 Paradise</td>
+                    <td>Para A</td>
+                    <td>121</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>25 Jan 2025</td>
+                    <td><span class="status cold">Paid</span></td>
+                    <td>25 Jan 2025</td>
+                    <td>A P 112 D1</td>
+                    <td><a href="#" class="view-link">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>121 Paradise</td>
+                    <td>Para A</td>
+                    <td>121</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>25 Jan 2025</td>
+                    <td><span class="status hot">Not Paid</span></td>
+                    <td>25 Jan 2025</td>
+                    <td>A P 112 D1</td>
+                    <td><a href="#" class="view-link">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>121 Paradise</td>
+                    <td>Para A</td>
+                    <td>121</td>
+                    <td>Mahesh Jadhav</td>
+                    <td>25 Jan 2025</td>
+                    <td><span class="status hot">Not Paid</span></td>
+                    <td>25 Jan 2025</td>
+                    <td>A P 112 D1</td>
+                    <td><a href="#" class="view-link">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="flatsFormModal" tabindex="-1" aria-labelledby="flatsFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="flatsFormModalLabel">Add Flat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Site Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Wing</label>
+                            <input type="text" class="form-control" placeholder="Enter wing">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Flat No.</label>
+                            <input type="text" class="form-control" placeholder="Enter flat no.">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Assign Lead to</label>
+                            <input type="text" class="form-control" placeholder="Enter name">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Booking Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Payment Status</label>
+                            <select class="form-select">
+                                <option>Select Payment Status</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-md-4">
+                            <label class="form-label">Next Reminder Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Alloted Parking</label>
+                            <input type="text" class="form-control" placeholder="Enter number">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="~/assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="~/assets/js/pages/dashboard.js"></script>
+
+<script src="~/assets/js/main.js"></script>
