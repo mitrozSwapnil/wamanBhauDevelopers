@@ -1,4 +1,6 @@
 ﻿@model List<LeadMasterViewModel>
+
+
 <div class="main-content">
     @* <div class="search-bar">
         <input type="text" placeholder="Search...">
@@ -80,38 +82,19 @@
                             <td>@item.Email</td>
                             <td>@item.AssignedToName</td>
                             <td>@item.SiteName</td>
+                            <td><span class="status cold">Cold</span></td>
+                            <td><span class="status hot">Hot</span></td>
                             <td><a asp-controller="Dashboard" asp-action="LeadDetails" asp-route-id="@item.LeadId" class="view-link">View Details</a></td>
                         </tr>
                     }
 
-                    @* <tr>
-                    <td>2</td>
-                    <td>23 Jan 2025</td>
-                    <td>Mahesh Jadhav</td>
-                    <td>12 Paradise</td>
-                    <td>Lower</td>
-                    <td>Instagram</td>
-                    <td>---</td>
-                    <td>Contacted</td>
-                    <td><span class="status cold">Cold</span></td>
-                    <td>+91 7350292956</td>
-                    <td><a asp-controller="Dashboard" asp-action="LeadDetails" class="view-link">View Details</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>21 Jan 2025</td>
-                    <td>Mahesh Jadhav</td>
-                    <td>12 Paradise</td>
-                    <td>Higher</td>
-                    <td>Walk-ins</td>
-                    <td>---</td>
-                    <td>Interested</td>
-                    <td><span class="status hot">Hot</span></td>
-                    <td>+91 7350292956</td>
-                    <td><a asp-controller="Dashboard" asp-action="LeadDetails" class="view-link">View Details</a></td>
-                </tr> *@
+                   
                 </tbody>
             </table>
+        }
+        else
+        {
+            <td>Records Not Found</td>
         }
 
     </div>
@@ -128,114 +111,200 @@
             </div>
             <div class="modal-body">
                 <form asp-action="AddLead" method="post">
-                   @*  <div class="row">
-                        <div class="col-md-4">
-                            <label asp-for="FirstName" class="form-label">Name of client</label>
-                            <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter name">
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-4">
-                            <label asp-for="FirstName" class="form-label">Site Name</label>
-                            <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter project">
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Property Type</label>
-                            <select class="form-select">
-                                <option>Select property type</option>
-                            </select>
-                        </div>
-                    </div> *@
-
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="form-label">Name of client</label>
-                            <input type="text" class="form-control" placeholder="Enter name">
-                            <span class="text-danger"></span>
+                            <label class="form-label">First Name</label>
+                            <input name="FirstName" type="text" class="form-control" placeholder="Enter first name">
+                            <span onabort="FirstName" class="text-danger"></span>
                         </div>
+
                         <div class="col-md-4">
-                            <label class="form-label">Site Name</label>
-                            <input type="text" class="form-control" placeholder="Enter project">
-                            <span class="text-danger"></span>
+                            <label class="form-label">Last Name</label>
+                            <input name="LastName" type="text" class="form-control" placeholder="Enter last name">
+                            <span onabort="LastName" class="text-danger"></span>
                         </div>
+
+                        @* <div class="col-md-4">
+                            <label class="form-label">Select Site Name</label>
+                            <select id="FkSiteId" name="FkSiteId" class="form-select">
+                                <option value="">Select property type</option>
+                            </select>
+                        </div> *@
+
                         <div class="col-md-4">
-                            <label class="form-label">Property Type</label>
-                            <select class="form-select">
-                                <option>Select property type</option>
+                            <label class="form-label">Select Site Name</label>
+                            <select name="FkSiteId" class="form-select" required>
+                                <option value="">Select Role</option>
+                                @if (ViewBag.SiteList != null)
+                                {
+                                    foreach (var site in ViewBag.SiteList)
+                                    {
+                                        <option value="@site.Id">@site.Name</option>
+                                    }
+                                }
                             </select>
                         </div>
+
+                        @* <div class="col-md-4">
+                            <label class="form-label">Property Type</label>
+                            <select id="PropertyTypeId" name="PropertyTypeId" class="form-select">
+                                <option>Select Property Type</option>
+                            </select>
+                        </div> *@
+
+                        <div class="col-md-4">
+                            <label class="form-label">Property Type</label>
+                            <select name="FkPropertyTypeId" class="form-select" required>
+                                <option value="">Select Role</option>
+                                @foreach (var property in ViewBag.PropertyTypeList)
+                                {
+                                    <option value="@property.Id">@property.PropertyName</option>
+                                }
+                            </select>
+                        </div>
+
+                        @* <select id="PropertyTypeId" name="PropertyTypeId" class="form-select">
+                            <option value="">Select Property Type</option>
+                        </select> *@
+
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <label class="form-label">Select Date</label>
-                            <input type="date" class="form-control">
+                            <input name="ContactDate" type="date" class="form-control">
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Referred by</label>
-                            <select class="form-select">
+
+                       @*  <div class="col-md-4">
+                            <label class="form-label">Source By</label>
+                            <select id="SourcList" name="SourcList" class="form-select">
                                 <option>Select Source</option>
                             </select>
-                        </div>
+                        </div> *@
+
                         <div class="col-md-4">
-                            <label class="form-label">Channel Partner</label>
-                            <select class="form-select">
-                                <option>Select Partner</option>
+                            <label class="form-label">Source By</label>
+                            <select name="FkSourceId" class="form-select" required>
+                                <option value="">Select Source</option>
+                                @foreach (var source in ViewBag.SourceList)
+                                {
+                                    <option value="@source.Id">@source.SourceName</option>
+                                }
                             </select>
                         </div>
+
+                        @* <select name="SourcList" class="form-select">
+                            <option value="">Select Source</option>
+                        </select> *@
+
+                       @*  <div class="col-md-4">
+                            <label class="form-label">Channel Partner</label>
+                            <select id="ChannelPartnerList" name="ChannelPartnerList" class="form-select">
+                                <option>Select Partner</option>
+                            </select>
+                        </div> *@
+
+                        <div class="col-md-4">
+                            <label class="form-label">Channel Partner</label>
+                            <select name="FkChannelPartnerId" class="form-select" required>
+                                <option value="">Channel Partner</option>
+                                @foreach (var channel in ViewBag.ChannelPartnerList)
+                                {
+                                    <option value="@channel.Id">@channel.ChannnelName</option>
+                                }
+                            </select>
+                        </div>
+
+                        @* <select name="ChannelPartnerList" class="form-select">
+                            <option value="">Select Partner</option>
+                        </select> *@
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <label class="form-label">Budget Range</label>
                             <div class="d-flex">
-                                <input type="text" class="form-control me-2" placeholder="From">
-                                <input type="text" class="form-control" placeholder="To">
+                                <input name="BudgetRangeFrom" type="text" class="form-control me-2" placeholder="From">
+                                <input name="BudgetRangeTo" type="text" class="form-control" placeholder="To">
+                                <span onabort="BudgetRangeFrom" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Contact Number 1</label>
-                            <input type="text" class="form-control" placeholder="Enter number">
+                            <input name="ContactNo1" type="text" class="form-control" placeholder="Enter number">
+                            <span onabort="ContactNo1" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Contact Number 2</label>
-                            <input type="text" class="form-control" placeholder="Enter number">
+                            <input name="ContactNo2" type="text" class="form-control" placeholder="Enter number">
+                            <span onabort="ContactNo2" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-4">
-                            <label class="form-label">Email Id</label>
-                            <input type="email" class="form-control" placeholder="Enter email id">
+                            <label class="form-label">Address</label>
+                            <input name="Address" type="text" class="form-control" placeholder="Enter Address">
+                            <span onabort="Address" class="text-danger"></span>
                         </div>
+
                         <div class="col-md-4">
-                            <label class="form-label">Assign Lead to</label>
-                            <input type="text" class="form-control" placeholder="Enter name">
+                            <label class="form-label">Email Id</label>
+                            <input name="Email" type="email" class="form-control" placeholder="Enter email id">
+                            <span onabort="Email" class="text-danger"></span>
                         </div>
+
+                        @* <div class="col-md-4">
+                            <label class="form-label">AssignTo User</label>
+                            <select id="AssignUserList" name="AssignUserList" class="form-select">
+                                <option>Select Status</option>
+                            </select>
+                        </div> *@
+
+                        <div class="col-md-4">
+                            <label class="form-label">AssignTo User</label>
+                            <select name="FkUserIdAssigned" class="form-select" required>
+                                <option value="">AssignTo User</option>
+                                @foreach (var user in ViewBag.AssignUser)
+                                {
+                                    <option value="@user.Id">@user.UserName</option>
+                                }
+                            </select>
+                        </div>
+
+                       @*  <select name="AssignUserList" class="form-select">
+                            <option value="">Select user</option>
+                        </select> *@
+
                         <div class="col-md-4">
                             <label class="form-label">Status</label>
-                            <select class="form-select">
+                            <select name="LeadStatus" class="form-select">
                                 <option>Select Status</option>
+                                <option value="0">Pending</option>
+                                <option value="1">Completed</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-4">
-                            <label class="form-label">Lead Category</label>
-                            <select class="form-select">
+                            <label  class="form-label">Lead Category</label>
+                            <select name="LeadCategory" class="form-select">
                                 <option>Select Category</option>
+                                <option value="1">Warm</option>
+                                <option value="2">Cold</option>
+                                <option value="3">Hot</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Floor Preference</label>
-                            <select class="form-select">
-                                <option>Select Floor Preference</option>
-                            </select>
+                            <textarea name="FloorPreference" class="form-control" placeholder="Add floor preference"></textarea>
+                            <span onabort="FloorPreference" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Notes</label>
-                            <textarea class="form-control" placeholder="Add new Notes"></textarea>
+                            <textarea name="Note" class="form-control" placeholder="Add new Notes"></textarea>
+                            <span onabort="Note" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -259,3 +328,64 @@
 <script src="~/assets/js/pages/dashboard.js"></script>
 
 <script src="~/assets/js/main.js"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@* <script>
+    $(document).ready(function () {
+        // When the modal is opened, fetch the dropdown data
+        $('#leadFormModal').on('shown.bs.modal', function () {
+            $.ajax({
+                url: '@Url.Action("GetDropdownList")', // URL of your GetDropdownList action
+                type: 'GET',
+                success: function (data) {
+                    // Populate the Site dropdown
+                    var siteDropdown = $('select[name="FkSiteId"]');
+                    siteDropdown.empty(); // Clear existing options
+                    siteDropdown.append('<option value="">Select Site</option>'); // Default option
+                    $.each(data.siteList, function (index, item) {
+                        siteDropdown.append('<option value="' + item.Id + '">' + item.selectSiteName + '</option>');
+                    });
+
+                    // Populate the Property Type dropdown
+                    var propertyTypeDropdown = $('select[name="PropertyTypeId"]');
+                    propertyTypeDropdown.empty();
+                    propertyTypeDropdown.append('<option value="">Select Property Type</option>');
+                    $.each(data.propertyTypeList, function (index, item) {
+                        propertyTypeDropdown.append('<option value="' + item.Id + '">' + item.selectPropertyName + '</option>');
+                    });
+
+                    // Populate the Source dropdown
+                    var sourceDropdown = $('select[name="SourcList"]');
+                    sourceDropdown.empty();
+                    sourceDropdown.append('<option value="">Select Source</option>');
+                    $.each(data.soursNameList, function (index, item) {
+                        sourceDropdown.append('<option value="' + item.Id + '">' + item.selectSourceName + '</option>');
+                    });
+
+                    // Populate the Channel Partner dropdown
+                    var channelPartnerDropdown = $('select[name="ChannelPartnerList"]');
+                    channelPartnerDropdown.empty();
+                    channelPartnerDropdown.append('<option value="">Select Partner</option>');
+                    $.each(data.channelPartnerNameList, function (index, item) {
+                        channelPartnerDropdown.append('<option value="' + item.Id + '">' + item.selectChannelPName + '</option>');
+                    });
+
+                    // Populate the Assign User dropdown
+                    var assignUserDropdown = $('select[name="AssignUserList"]');
+                    assignUserDropdown.empty();
+                    assignUserDropdown.append('<option value="">Select User</option>');
+                    $.each(data.assignUserNameList, function (index, item) {
+                        assignUserDropdown.append('<option value="' + item.Id + '">' + item.selectUserName + '</option>');
+                    });
+                },
+                error: function () {
+                    alert("Error fetching data.");
+                }
+            });
+        });
+    });
+</script>
+ *@

@@ -1,4 +1,6 @@
-﻿namespace WamanBhauDeveloper.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace WamanBhauDeveloper.Models
 {
     public class LeadMasterViewModel
     {
@@ -50,11 +52,18 @@
         public DateTime UpdatedAt { get; set; }
 
         public int UpdatedBy { get; set; }
+
+        public SelectList SiteNameList { get; set; } = new SelectList(Enumerable.Empty<SelectListItem>());
+        public SelectList PropertyTypeList { get; set; } = new SelectList(Enumerable.Empty<SelectListItem>());
+        public SelectList SourcList { get; set; } = new SelectList(Enumerable.Empty<SelectListItem>());
+        public SelectList ChannelPartnerList { get; set; } = new SelectList(Enumerable.Empty<SelectListItem>());
+        public SelectList AssignUserList { get; set; } = new SelectList(Enumerable.Empty<SelectListItem>());
+
     }
 
-    public class LeadViewModel
-    {
-        //public LeadMasterViewModel NewLead { get; set; } 
-        public List<LeadMasterViewModel> LeadList { get; set; }  // List for table
-    }
+    //public class LeadViewModel
+    //{
+    //    public List<LeadMasterViewModel> Leads { get; set; } = new List<LeadMasterViewModel>();
+    //    public LeadMasterViewModel LeadForm { get; set; } = new LeadMasterViewModel();
+    //}
 }
